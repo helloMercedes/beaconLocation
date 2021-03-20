@@ -34,15 +34,8 @@ print("My nearest known beacon is: "+str(nearestKnown[0])+" with strength: "+str
 print("I'm probably here: "+str(map.get(nearestDevs[0][0])))
 
 
-import os, json
-
-json_data = {"location": map.get(nearestKnown[0])}
 
 
-print(json.dumps(json_data, indent=1))
+import os
 
-command = 'sudo -u pi ssh ubuntu@zaphod.vsos.ethz.ch \'sed -i \'/location\":/c\\"location\": \"history\"\' info.json /home/ubuntu/api/api/info.json\''
-
-print(command)
-
-os.system(command)
+os.system('sudo -u pi ssh ubuntu@zaphod.vsos.ethz.ch "echo '+str(map.get(nearestKnown[0]))+' > /home/ubuntu/api/rpi"')
